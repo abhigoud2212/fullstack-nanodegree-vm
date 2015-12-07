@@ -4,6 +4,8 @@ This program simulates the rounds using the Swiss system for pairing up players 
 ###Install VirtualBox
 https://www.virtualbox.org/wiki/Downloads
 
+**windows user:** If there are issues with vagrant 5,  install vagrant 4.4
+
 ### Install Vagrant
 https://www.vagrantup.com/downloads
 
@@ -19,7 +21,7 @@ $ vagrant up
 $ vagant ssh
 ```
 
-### Swiss Tournament
+###Swiss Tournament
 ```
 $ cd /
 $ cd vagrant

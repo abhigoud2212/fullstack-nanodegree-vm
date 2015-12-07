@@ -11,7 +11,7 @@ CREATE DATABASE tournament;
 
 -- table for storing players
 CREATE TABLE players (id serial primary key,
-                     name varchar(40) not null
+                     name text not null
                      );
 
 -- table for store match details

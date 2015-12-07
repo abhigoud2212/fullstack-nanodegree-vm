@@ -27,13 +27,13 @@ $ cd /
 $ cd vagrant
 $ cd tournament
 ```
-###Initialize to Database
+###Initialize Database
 ```
 $ psql
 vagrant=> \i tournament.sql
 vagrant=> \q
 ```
-###Run the unit tests
+###Run the tests
 `$ python tournament_test.py`
 
 If successful, you should see a message **Success!  All tests pass!**

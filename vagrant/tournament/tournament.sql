@@ -20,7 +20,7 @@ CREATE TABLE matches (match_id serial primary key,
                      loser integer references players(id) not null
                      );
 
--- VIEW to display id, name, Total wins, Total matches
+-- VIEW to display id, name, Total wins(sorted), Total matches(sorted)
 CREATE VIEW standings AS select players.id, players.name,
                          (select count(matches.winner) from
                          matches where players.id = matches.winner)

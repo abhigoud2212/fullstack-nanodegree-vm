@@ -99,6 +99,7 @@ def swissPairings():
     rows = c.fetchall()
     c.close()
     pairs = []
+    # Iterate over the standings and match up the players
     for i in range(0, len(rows), 2):
         player_pairs = rows[i][0], rows[i][1], rows[i+1][0], rows[i+1][1]
         pairs.append(player_pairs)

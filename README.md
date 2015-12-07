@@ -7,8 +7,6 @@ https://www.virtualbox.org/wiki/Downloads
 ### Install Vagrant
 https://www.vagrantup.com/downloads
 
-**windows user:** If there are issues with vagrant 5,  install vagrant 4.0 
-
 ###Clone the Repository
 ```
 $ git clone https://github.com/abhigoud2212/fullstack-nanodegree-vm.git

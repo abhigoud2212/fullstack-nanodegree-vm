@@ -13,12 +13,38 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 @app.route('/')
+
+#show all restaurants
+@app.route('/restaurants/')
+def showRestaurants():
+    restaurant = session.query(Restaurant).all()
+    output = render_template('restaurants.html',restaurant = restaurant)
+    return output
+# create new Restaurants
+@app.route('/restaurants/new', methods =['GET', 'POST'])
+def newRestaurant():
+    if request.method == 'POST':
+        newRestaurant = Restaurant(name=request.form['name'])
+        session.add(newRestaurant)
+        session.commit()
+        return redirect(url_for('showRestaurants'))
+    else:
+        return render_template('newRestaurant.html')
+
 @app.route('/restaurants/<int:restaurant_id>/')
 def restaurantMenu(restaurant_id):
     restaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
     items = session.query(MenuItem).filter_by(restaurant_id = restaurant_id)
     output = render_template('menu.html', restaurant = restaurant, items = items)
     return output
+
+#show menu class
+@app.route('/restaurants/<int:restaurant_id>/menu/')
+def showMenu(restaurant_id):
+    restaurant = session.query(Restaurant).filter_by(id = restaurant_id).one()
+    items = session.query(MenuItem).filter_by(
+    restaurant_id=restaurant_id).all()
+    return render_template('menu.html', items=items, restaurant=restaurant)
 
 # Task 1: Create route for newMenuItem function here
 

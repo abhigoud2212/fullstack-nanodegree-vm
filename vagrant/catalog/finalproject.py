@@ -33,7 +33,9 @@ session = DBSession()
 @app.route('/restaurant/')
 def showRestaurants():
     restaurants = session.query(Restaurant).all()
-    return render_template('restaurants.html', restaurants=restaurants, login_session = login_session)
+    return render_template('restaurants.html',
+                           restaurants=restaurants,
+                           login_session=login_session)
 
 
 # Anti foggery state token
@@ -61,8 +63,10 @@ def fbconnect():
         'web']['app_id']
     app_secret = json.loads(
         open('fb_client_secrets.json', 'r').read())['web']['app_secret']
-    url = 'https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&client_id=%s&client_secret=%s&fb_exchange_token=%s' % (
-        app_id, app_secret, access_token)
+    url = 'https://graph.facebook.com/oauth/access_token?' \
+          'grant_type=fb_exchange_token&client_id=%s&client_secret=%s' \
+          '&fb_exchange_token=%s'\
+          % (app_id, app_secret, access_token)
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
 
@@ -71,8 +75,8 @@ def fbconnect():
     # strip expire tag from access token
     token = result.split("&")[0]
 
-
-    url = 'https://graph.facebook.com/v2.4/me?%s&fields=name,id,email' % token
+    url = 'https://graph.facebook.com/v2.4/me?%s&fields=name,id,email'\
+          % token
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
     # print "url sent for API access:%s"% url
@@ -83,14 +87,17 @@ def fbconnect():
     login_session['email'] = data["email"]
     login_session['facebook_id'] = data["id"]
 
-    # The token must be stored in the login_session in order to properly logout,
+    # The token must be stored in the
+    # login_session in order to properly logout,
     # let's strip out the information before the equals sign in our token
 
     stored_token = token.split("=")[1]
     login_session['access_token'] = stored_token
 
     # Get user picture
-    url = 'https://graph.facebook.com/v2.5/me/picture?%s&redirect=0&height=200&width=200' % token
+    url = 'https://graph.facebook.com/v2.5/me/picture?' \
+          '%s&redirect=0&height=200&width=200'\
+          % token
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
     data = json.loads(result)
@@ -110,11 +117,15 @@ def fbconnect():
     output += '!</h1>'
     output += '<img src="'
     output += login_session['picture']
-    output += ' " style = "width: 300px; height: 300px;border-radius:' \
-              ' 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
+    output += ' " style = "width: 300px; ' \
+              'height: 300px;border-radius:150px;' \
+              '-webkit-border-radius: 150px;' \
+              '-moz-border-radius: 150px;"> '
 
     flash("Now logged in as %s" % login_session['username'])
     return output
+
+# Facebook disconnect
 
 
 @app.route('/fbdisconnect')
@@ -123,12 +134,14 @@ def fbdisconnect():
     print login_session['facebook_id']
     # The access token must me included to successfully logout
     access_token = login_session['access_token']
-    url = 'https://graph.facebook.com/%s/permissions?access_token=%s' % (facebook_id,access_token)
+    url = 'https://graph.facebook.com/%s/permissions?' \
+          'access_token=%s'\
+          % (facebook_id, access_token)
     h = httplib2.Http()
     result = h.request(url, 'DELETE')[1]
     return "you have been logged out"
 
-
+# Google plus sign in function
 
 
 @app.route('/gconnect', methods=['POST'])
@@ -184,8 +197,9 @@ def gconnect():
     stored_credentials = login_session.get('credentials')
     stored_gplus_id = login_session.get('gplus_id')
     if stored_credentials is not None and gplus_id == stored_gplus_id:
-        response = make_response(json.dumps('Current user is already connected.'),
-                                 200)
+        response = make_response(json.dumps('Current user'
+                                            ' is already connected')
+                                 , 200)
         response.headers['Content-Type'] = 'application/json'
         return response
 
@@ -218,7 +232,10 @@ def gconnect():
     output += '!</h1>'
     output += '<img src="'
     output += login_session['picture']
-    output += ' " style = "width: 300px; height: 300px;border-radius: 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
+    output += ' " style = "width: 300px;' \
+              ' height: 300px;border-radius: 150px;' \
+              '-webkit-border-radius: 150px;' \
+              '-moz-border-radius: 150px;"> '
     flash("you are now logged in as %s" % login_session['username'])
     print "done!"
     return output
@@ -247,7 +264,7 @@ def getUserID(email):
     except:
         return None
 
-# DISCONNECT - Revoke a current user's token and reset their login_session
+# DISCONNECT - Delete current user's token and reset their login_session
 
 
 @app.route('/gdisconnect')
@@ -284,7 +301,8 @@ def newRestaurant():
         flash("Created a new Restaurant %s..!!!" % newRestaurant.name)
         return redirect(url_for('showRestaurants'))
     else:
-        return render_template('newRestaurant.html', login_session = login_session)
+        return render_template('newRestaurant.html',
+                               login_session=login_session)
 
 
 # Edit a restaurant
@@ -300,8 +318,9 @@ def editRestaurant(restaurant_id):
                   % editedRestaurant.name)
             return redirect(url_for('showRestaurants'))
     else:
-        return render_template(
-            'editRestaurant.html', restaurant=editedRestaurant, login_session = login_session)
+        return render_template('editRestaurant.html',
+                               restaurant=editedRestaurant,
+                               login_session=login_session)
 
 
 # Delete a restaurant
@@ -318,8 +337,9 @@ def deleteRestaurant(restaurant_id):
         return redirect(
             url_for('showRestaurants', restaurant_id=restaurant_id))
     else:
-        return render_template(
-            'deleteRestaurant.html', restaurant=restaurantToDelete, login_session = login_session)
+        return render_template('deleteRestaurant.html',
+                               restaurant=restaurantToDelete,
+                               login_session=login_session)
 
 
 # Show a restaurant menu
@@ -330,7 +350,10 @@ def showMenu(restaurant_id):
     restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
     items = session.query(MenuItem).filter_by(
         restaurant_id=restaurant_id).all()
-    return render_template('menu.html', items=items, restaurant=restaurant, login_session = login_session)
+    return render_template('menu.html',
+                           items=items,
+                           restaurant=restaurant,
+                           login_session=login_session)
 
 
 # Create a new menu item
@@ -350,9 +373,13 @@ def newMenuItem(restaurant_id):
         flash("Created new item %s..!!!" % newItem.name)
         return redirect(url_for('showMenu', restaurant_id=restaurant_id))
     else:
-        return render_template('newmenuitem.html', restaurant_id=restaurant_id, login_session = login_session)
+        return render_template('newmenuitem.html',
+                               restaurant_id=restaurant_id,
+                               login_session=login_session)
 
-    return render_template('newMenuItem.html', restaurant=restaurant)
+    return render_template('newMenuItem.html',
+                           restaurant=restaurant,
+                           login_session=login_session)
 
 
 # Edit a menu item
@@ -378,9 +405,9 @@ def editMenuItem(restaurant_id, menu_id):
     else:
 
         return render_template(
-            'editmenuitem.html', restaurant_id=restaurant_id,
-            menu_id=menu_id, item=editedItem,
-            login_session = login_session)
+                'editmenuitem.html', restaurant_id=restaurant_id,
+                menu_id=menu_id, item=editedItem,
+                login_session=login_session)
 
 
 # Delete a menu item
@@ -396,7 +423,8 @@ def deleteMenuItem(restaurant_id, menu_id):
         flash("Deleted the item with name %s...!!!" % itemToDelete.name)
         return redirect(url_for('showMenu', restaurant_id=restaurant_id))
     else:
-        return render_template('deleteMenuItem.html', item=itemToDelete, login_session = login_session)
+        return render_template('deleteMenuItem.html',
+                               item=itemToDelete, login_session=login_session)
 
 
 # JSON files for the menus and restaurants
@@ -422,6 +450,8 @@ def restaurantsJSON():
     return jsonify(restaurants=[r.serialize for r in restaurants])
 
 # Disconnect based on provider
+
+
 @app.route('/disconnect')
 def disconnect():
     if 'provider' in login_session:

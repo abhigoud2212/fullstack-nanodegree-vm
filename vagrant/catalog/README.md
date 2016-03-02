@@ -35,5 +35,5 @@ $ cd catalog
 ###Run the tests
 `$ python tournament_test.py`
 
-If successful, you should see a message **Success!  All tests pass!**
+If successful, you should see a message **added menu items!**
 

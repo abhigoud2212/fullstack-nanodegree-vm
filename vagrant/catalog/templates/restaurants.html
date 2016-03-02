@@ -1,43 +1,35 @@
-<html>
-
-<head>
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
-	</head>
-
+{% include "header.html" %}
 
 <body>
-<div class = 'pane'>
-<h1 class="text-heading">Restaurants</h1>
+    <div class = 'header'>
+			<h1> RESTAURANTS</h1>
+		</div>
+        <a href="{{url_for('newRestaurant')}}" class="row col-lg-10 well restaurants new-restaurant-item">
+        Create a New Restaurant...</a>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
 
-
-<a href="{{url_for('newRestaurant')}}" class="createitem"> Create a New Restaurant<br><br></a>
-
-
-	<div class = "flash">
-		      {% with messages = get_flashed_messages() %}
-			{% if messages %}
-			<ul>
-        		{% for message in messages %}
-            	<li> <strong style="color:red;"> {{ message }} </strong> </li>
-        		{% endfor %}
-        	</ul>
-        		{% endif %}
-    			{% endwith %}
+                {% for message in messages %}
+                <div class = "row col-lg-10 flash">
+                   <p class="bg-success"> {{ message }} </p> </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
 
 {% for restaurant in restaurants %}
 
+        <div class = "row col-lg-10  well restaurants">
 
-<a href = "{{url_for('showMenu', restaurant_id = restaurant.id)}}" class = "restaurant-name">{{restaurant.name}}</a>
-	<div class = "editdeletepane">
-		<a href = "{{url_for('editRestaurant',restaurant_id = restaurant.id)}}">Edit</a>
-		<a href = "{{url_for('deleteRestaurant',restaurant_id = restaurant.id)}}">Delete</a>
-	</div>
-
-
-
+                <a href = "{{url_for('showMenu', restaurant_id = restaurant.id)}}"
+                   class = "row col-lg-10 name-restaurant">{{restaurant.name}}</a>
+                <a href = "{{url_for('editRestaurant',restaurant_id = restaurant.id)}}"
+                   class="btn btn-info col-md-1" > Edit</a>
+                <a href = "{{url_for('deleteRestaurant',restaurant_id = restaurant.id)}}"
+                   class="btn btn-danger col-md-1">Delete</a>
+        </div>
 {% endfor %}
-
-</div>
 </body>
-
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+ integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 </html>

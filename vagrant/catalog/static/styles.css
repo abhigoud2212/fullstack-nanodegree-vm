@@ -1,13 +1,47 @@
-body            { font-family: sans-serif; background-image: url('img.jpg'); background-color: white}
+.heading-img1{
+    color: rgb(62, 56, 56);
+    font-family: cursive;
+    font-size:18px;
+    background-image: url('img1.jpg');
+    background-repeat: repeat;
+    background-size: cover;
+    padding-top: 10px;
+    width: 100%;
+    padding-bottom: 15px;
+
+    }
+ .heading-bg{
+   padding: 12px;
+    color: rgb(62, 56, 56);
+    font-family: cursive;
+    font-size:18px;
+    background-image: url('img3.jpg');
+    background-repeat: repeat;
+    background-size: cover;
+
+
+    }
+ .restaurants{
+   padding: 12px;
+    color: rgb(62, 56, 56);
+    font-family: cursive;
+    font-size:18px;
+    background-image: url('img2.jpg');
+    background-repeat: repeat;
+    background-size: cover;
+    margin-left: 75px;
+
+    }
+body            { font-family: sans-serif; background-color: white}
 h1, h2,h3, h4       { color: black; }
 h1, h2          { font-family: 'Georgia', serif; }
 h2              { font-size: 1.2em; }
 
 p, dd, dt               { color:lightslategrey;}
 
-a {text-decoration: none; color:sienna; font-size: .82em;}
+a {text-decoration: none; color:floralwhite; }
 
-.pane { left:1%; border-radius: 25px; padding: 5px; margin: 5px;}
+.padding { left:1%; border-radius: 25px; padding: 5px; margin: 5px;}
 .header         { left:50%; text-align: center;}
 .name {width:20%;
     display:inline-block;
@@ -17,64 +51,70 @@ a {text-decoration: none; color:sienna; font-size: .82em;}
     }
 
 .price {text-align: right; width:20%; float: right;  }
-.editdeletepane{padding-bottom: 22px;}
 
-.createitem{
-font-size: 22px;
-color:rgba(118, 16, 179, 0.58);
-}
-
-.homebutton{
-    float: right;
-    font-size : 20px;
-    color: blue;
-    padding-right:100;
-    }
-
- .name-restaurant {color: cornflowerblue;
-    font-size: 25;
-    font-style: oblique;
-    font-family: -webkit-pictograph;}
-
- .text-heading{
-   padding: 12px;
-    font-size: 54px;
-    text-align: left;
-    color: rgb(62, 56, 56);
+.heading{
+font-size: -webkit-xxx-large;
+    color: white;
+    TEXT-ALIGN: center;
+ }
+ .flash{
+    color: black;
     font-family: cursive;
-    background-image: url('img3.jpg');
-    background-repeat: no-repeat;
-    background-size: 1240px;
+    font-size:30px;
+    margin-left: 75px;
 
     }
-
+.homebutton{
+   float: left;font-size: 33px;
+    }
+.new-restaurant-item {
+    color:red;
+    font-style: oblique;
+    font-size:28px;}
+.name-restaurant{
+ color: wheat;
+ font-size: 30;
+}
  .text-price{
  color:Red;
  }
-.flash{color: grey;
-    font-size: 22; }
-.menu-items {
-    font-size: 15px;
-}
 .menu-name{
-    width: 30px;
-    color: grey;
-    font-size: 22;
+    color: brown;
+    font-size: 30;
 }
-
+.menu-items{
+    padding: 12px;
+    color: rgb(62, 56, 56);
+    font-family: cursive;
+    font-size:18px;
+    background-image: url('menu-items.jpg');
+    background-repeat: repeat;
+    background-size: cover;
+    margin-left: 75px;
+}
+.centeralign{
+    float: right;
+    padding-right: 500px;
+    padding-top: 232px;
+    display: inline-flex;
+}
 .restaurant-name{
     color: lightslategrey;
     font-size: 22;
 }
 .menu-desc{
-    color: cadetblue;
-    font-size: 16px;
-    padding: 14px;
-    padding-left: 61px;
+    color: gray;
+    font-size: 20px;
+    padding-bottom: 15px;
+    margin-left: 20px;
+   }
+ .login_tag{
+   float:right;
+   font-size:20px;
    }
 .menu-price{
    float:right;
-   margin-right:250px;
+   color: chocolate;
    }
  .create-and-home{
  padding:14px}

@@ -1,0 +1,41 @@
+
+<head>
+	   <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	 integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" 
+	integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+	<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+	<!-- login session checker Start -->
+
+	<div class = "container heading-img1">
+		<div class = "row">
+			<div class = "col-lg-1" >
+			 <a href="{{url_for('showRestaurants') }}">
+      			<span class="glyphicon glyphicon-home homebutton"  aria-hidden="true"></span> Home
+    		</a>
+    		</div>
+    		<div class = "col-lg-8 heading" > RESTAURANT MENU APP </div>
+	
+			
+			  	{% if 'username' not in session %}
+            		<div class = "col-lg-3 text-right">
+            			<a class="login_tag btn btn-info" href="{{url_for('showLogin')}}">Login </a>
+            		</div>
+			  	{% else %}
+					<div class = "col-lg-3 login_tag">
+			        	<a href = "{{url_for('showRestaurants') }}"><img src="{{login_session['picture']}}"
+			         		class="img-circle" alt="Cinque Terre" width="50px" height="50px"> <br>
+			        		{{login_session['username']}}<br> </a>
+			        	<a href="{{url_for('disconnect')}}" class="btn btn-info">Logout </a>
+			    {% endif %}
+			</div>
+
+		</div>
+
+	</div>
+	<!-- login session end-->
+</head>

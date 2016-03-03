@@ -27,8 +27,13 @@ $ cd /
 $ cd vagrant
 $ cd catalog
 ```
+
+### If pip Already installed
+If pip is already installed. Run the following command in Shell. Which will install all the necessary things to run the App.
+
+`pip install -r requirments.txt `
 ### Databse Setup  
-'$ python database_setup.py'
+`$ python database_setup.py`
 
 ### Adding menus
 `$ python lotsofmenus.py`

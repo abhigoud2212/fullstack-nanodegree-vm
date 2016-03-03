@@ -17,6 +17,15 @@
 
 			{% for i in items %}
 		<div class="col-lg-10 row well menu-items">
+			{%if i.image%}
+				<img src="{{i.image}}"
+			         		class="img-rounded" alt="Cinque Terre" width="100px" height="100px"
+					style="float:left;">
+			{%else%}
+				<img src="../../../static/no-image.png"
+			         		class="img-rounded" alt="Cinque Terre" width="100px" height="100px"
+					style="float:left;">
+			{%endif%}
 			<div class="col-lg-9 menu-name">{{i.name}} </div>
 				<div class="col-lg-1 text-right menu-price">{{i.price}}</div>
 

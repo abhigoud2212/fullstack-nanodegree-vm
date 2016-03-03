@@ -3,7 +3,7 @@ __author__ = 'abhig'
 import sys
 from sqlalchemy import Column,ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, backref
 from sqlalchemy import create_engine
 
 Base = declarative_base()
@@ -23,8 +23,16 @@ class Restaurant(Base):
 
     id = Column(Integer, primary_key = True)
     name = Column(String(200), nullable= False)
-    user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship(User)
+    user_id = Column(Integer, ForeignKey('user.id', ondelete='CASCADE'))
+    user = relationship(User, backref="restaurant", passive_deletes=True)
+
+    @property
+    def serialize(self):
+
+        return {
+            'id': self.id,
+            'name': self.name
+        }
 
 class MenuItem(Base):
 
@@ -35,10 +43,11 @@ class MenuItem(Base):
     description = Column(String(250))
     price = Column(String(8))
     course = Column(String(250))
-    restaurant_id = Column(Integer, ForeignKey('restaurant.id'))
-    restaurant = relationship(Restaurant)
-    user_id = Column(Integer, ForeignKey('user.id'))
-    user = relationship(User)
+    image = Column(String(250))
+    restaurant_id = Column(Integer, ForeignKey('restaurant.id', ondelete='CASCADE'))
+    restaurant = relationship(Restaurant, backref="menu_item", passive_deletes=True)
+    user_id = Column(Integer, ForeignKey('user.id', ondelete='CASCADE'))
+    user = relationship(User, backref="menu_item", passive_deletes=True)
 
 # serializable format
     @property
@@ -50,6 +59,7 @@ class MenuItem(Base):
             'id': self.id,
             'price': self.price,
             'course': self.course,
+            'image': self.image
         }
 ### Insert at the end of the file #####
 engine = create_engine('sqlite:///restaurantmenuwithusers.db')

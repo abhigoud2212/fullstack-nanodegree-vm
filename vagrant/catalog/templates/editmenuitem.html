@@ -6,13 +6,14 @@
 
 
 	<p>Name:</p>
-		<input type ='text' size='30' name='name' placeholder = '{{item.name }}'>
+		<input type ='text' size='30' name='name' value= '{{item.name }}'>
 	<p>Description:</p>
-		<input type ='textarea' size='30' name='description' placeholder = '{{item.description}}'>
+		<input type ='textarea' size='30' name='description' value= '{{item.description}}'>
 	<p>Price:</p>
-		<input type ='text' size='30' name='price' placeholder = '{{item.price}}'>
+		<input type ='text' size='30' name='price' value= '{{item.price}}'>
+	<p>Edit Image:</p>
+		<input type='text' size="40" name="image">
 	<p>Course:<p>
-
 	{% if item.course == 'Appetizer' %}
 		<dd><input type ='radio' name='course' value='Appetizer'checked >Appetizer</dd>
 	{%else%}

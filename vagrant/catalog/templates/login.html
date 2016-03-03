@@ -11,9 +11,18 @@
 <!-- END PRE-REQUISITES FOR GOOGLE SIGN IN -->
 
 
-
 <body>
 <h1 class="header">LOGIN</h1>
+
+{% with messages = get_flashed_messages() %}
+            {% if messages %}
+
+                {% for message in messages %}
+                <div class = "row col-lg-10 flash">
+                   <p class="bg-success"> {{ message }} </p> </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
 
 <div id="result"></div>
 

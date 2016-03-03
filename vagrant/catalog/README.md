@@ -43,5 +43,5 @@ If pip is already installed. Run the following command in Shell. Which will inst
 
 If successful, you should see a message **added menu items!**
 
-### Run finalproject.py by following to see the website at http://localhost:5000 
+### Run finalproject.py and goto http://localhost:5000 to see the website
 `$ python finalproject.py` 
